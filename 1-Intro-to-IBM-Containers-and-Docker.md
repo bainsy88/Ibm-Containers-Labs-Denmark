@@ -23,19 +23,19 @@ Docker Engine should be installed and running in your machine. In this task we w
 
         $ docker version
         Client:
-         Version:      1.8.3
-         API version:  1.20
-         Go version:   go1.4.2
-         Git commit:   f4bf5c7
-         Built:        Mon Oct 12 18:01:15 UTC 2015
+         Version:      1.13.1
+         API version:  1.26
+         Go version:   go1.7.5
+         Git commit:   092cba3
+         Built:        Wed Feb  8 08:47:51 2017
          OS/Arch:      darwin/amd64
 
         Server:
-         Version:      1.8.3
-         API version:  1.20
-         Go version:   go1.4.2
-         Git commit:   f4bf5c7
-         Built:        Mon Oct 12 18:01:15 UTC 2015
+         Version:      1.13.1
+         API version:  1.26 (minimum version 1.12)
+         Go version:   go1.7.5
+         Git commit:   092cba3git 
+         Built:        Wed Feb  8 08:47:51 2017
          OS/Arch:      linux/amd64
 
 2. To get started with Docker, run a simple container locally, using the `hello-world` image with the command """docker run hello-world".
@@ -66,12 +66,12 @@ First, you will need to pull them down locally from the public [DockerHub](https
         $ docker pull mongo
         Using default tag: latest
         latest: Pulling from library/mongo
-        68e42ff590bd: Pull complete
-        b4c4e8b590a7: Pull complete
-        f037c6d892c5: Pull complete
+        5040bd298390: Pull complete 
+        ef697e8d464e: Pull complete 
+        67d7bf010c40: Pull complete 
         ...
-        202e2c1fe066: Pull complete
-        Digest: sha256:223d59692269be18696be5c4f48e3d4117c7f11e175fe760f6b575387abc1bba
+        ec68d17240b3: Pull complete 
+        Digest: sha256:0d4453308cc7f0fff863df2ecb7aae226ee7fe0c5257f857fd892edf6d2d9057
         Status: Downloaded newer image for mongo:latest
 
 2. Pull the Let's Chat image from DockerHub
@@ -79,12 +79,12 @@ First, you will need to pull them down locally from the public [DockerHub](https
         $ docker pull sdelements/lets-chat
         Using default tag: latest
         latest: Pulling from sdelements/lets-chat
-        7a42f1433a16: Already exists
-        3d88cbf54477: Already exists
+        6a5a5368e0c2: Pull complete 
+        7b9457ec39de: Pull complete
         ...
-        ca11de166bed: Already exists
-        2409eb7b9e8c: Already exists
-        Digest: sha256:98d1637b93a1fcc493bb00bb122602036b784e3cde25e8b3cae29abd15275206
+        a75c55aa55f6: Pull complete 
+        876c39157780: Pull complete 
+        Digest: sha256:5b923d428176250653530fdac8a9f925043f30c511b77701662d7f8fab74961c
         Status: Image is up to date for sdelements/lets-chat:latest
 
 3. You can verify that containers can be deployed from these images and are compatible by running the applications locally.  Use the following "docker run" commands to start the two container instances.  The output is the unique container identifier and verifies completion of the executed command.
@@ -128,14 +128,14 @@ In this task, we will log into the IBM Containers command line to connect to Blu
 
 1. Back at your Terminal window, configure the Cloud Foundry CLI to work with the nearest IBM Bluemix region.  This ensures you will be working with the US South region of Bluemix.  To use the London datacenter, the API endpoint is "cf api https://api.eu-gb.bluemix.net".
 
-        $ cf api https://api.ng.bluemix.net
-        Setting api endpoint to https://api.ng.bluemix.net...
+        $ cf api https://api.eu-gb.bluemix.net
+        Setting api endpoint to https://api.eu-gb.bluemix.net...
         OK
 
 2. Log in to Bluemix through the Cloud Foundry CLI
 
         $ cf login
-        API endpoint: https://api.ng.bluemix.net
+        API endpoint: https://api.eu-gb.bluemix.net
 
         Email> <ENTER_EMAIL_USED_WHEN_CREATING_BLUEMIX_ACCOUNT> i.e., osowski@us.ibm.com
 
@@ -154,7 +154,7 @@ In this task, we will log into the IBM Containers command line to connect to Blu
 
 
 
-        API endpoint:   https://api.ng.bluemix.net (API version: 2.40.0)   
+        API endpoint:   https://api.eu-gb.bluemix.net (API version: 2.40.0)   
         User:           osowski@us.ibm.com   
         Org:            IBM_Containers_Demo_Org   
         Space:          IBM_Containers_Demo_Org
@@ -163,7 +163,7 @@ In this task, we will log into the IBM Containers command line to connect to Blu
 
         $ cf ic login
         Client certificates are being retrieved from IBM Containers...
-        Client certificates are being stored in /Users/osowski/.ice/certs/containers-api.ng.bluemix.net...
+        Client certificates are being stored in /Users/osowski/.ice/certs/containers-api.eu-gb.bluemix.net...
         OK
         Client certificates were retrieved.
 
@@ -187,8 +187,8 @@ In this task, we will log into the IBM Containers command line to connect to Blu
         Option 2: Use the Docker CLI directly. In this shell, override the local Docker environment to connect to IBM Containers by setting these variables. Copy and paste the following commands:
         	Note: Only Docker commands followed by (Docker) are supported with this option.
 
- 	        export DOCKER_HOST=tcp://containers-api.ng.bluemix.net:8443
-         	export DOCKER_CERT_PATH=/Users/osowski/.ice/certs/containers-api.ng.bluemix.net
+ 	        export DOCKER_HOST=tcp://containers-api.eu-gb.bluemix.net:8443
+         	export DOCKER_CERT_PATH=/Users/osowski/.ice/certs/containers-api.eu-gb.bluemix.net
          	export DOCKER_TLS_VERIFY=1
 
         	Example Usage:
