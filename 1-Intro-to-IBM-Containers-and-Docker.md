@@ -127,11 +127,10 @@ First, you will need to pull them down locally from the public [DockerHub](https
 In this task, we will log into the IBM Containers command line to connect to Bluemix running on the IBM Cloud.
 
 1. Back at your Terminal window, configure the Cloud Foundry CLI to work with the nearest IBM Bluemix region.  This ensures you will be working with the US South region of Bluemix.  To use the London datacenter, the API endpoint is "cf api https://api.eu-gb.bluemix.net".
-
+   
         $ cf api https://api.eu-gb.bluemix.net
         Setting api endpoint to https://api.eu-gb.bluemix.net...
         OK
-
 2. Log in to Bluemix through the Cloud Foundry CLI
 
         $ cf login
@@ -160,6 +159,7 @@ In this task, we will log into the IBM Containers command line to connect to Blu
         Space:          IBM_Containers_Demo_Org
 
 3. If you have not previously used the IBM Container service you need to set a namespace, this can be skipped if you have previously used the service.
+        
         $ cf ic namespace set <ENTER_DESIRED_NAMESPACE> 
         <DESIRED_NAMESPACE>
 
