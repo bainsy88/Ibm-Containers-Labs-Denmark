@@ -1,4 +1,4 @@
-# Lab 4: Container Group Scaling and Recoverability
+# Lab 3: Container Group Scaling and Recoverability
 
 > **Difficulty**: Intermediate
 
