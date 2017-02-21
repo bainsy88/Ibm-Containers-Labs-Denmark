@@ -159,7 +159,11 @@ In this task, we will log into the IBM Containers command line to connect to Blu
         Org:            IBM_Containers_Demo_Org   
         Space:          IBM_Containers_Demo_Org
 
-3. Log in to the IBM Container service on Bluemix
+3. If you have not previously used the IBM Container service you need to set a namespace, this can be skipped if you have previously used the service.
+        $ cf ic namespace set <ENTER_DESIRED_NAMESPACE> 
+        <DESIRED_NAMESPACE>
+
+4. Log in to the IBM Container service on Bluemix
 
         $ cf ic login
         Client certificates are being retrieved from IBM Containers...
