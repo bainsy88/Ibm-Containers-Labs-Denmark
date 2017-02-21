@@ -30,7 +30,7 @@ This task walks you through setting up a sample application. If you already have
 
  1. Get the application code to use for this lab and log in to Bluemix
 
-	* `git clone https://github.com/crosen188/ibm-containers-interconnect-2016.git`
+	* `git clone https://github.com/bainsy88/containers-denmark.git`
 	* `cd ibm-containers-interconnect-2016/lab_assets/activedeploy/cfapps`
 	* `cf login -u [EMAIL_ADDRESS] -a api.ng.bluemix.net`
 	
