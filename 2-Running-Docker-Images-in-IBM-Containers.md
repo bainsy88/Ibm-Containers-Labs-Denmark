@@ -13,7 +13,7 @@
 
 ## Prerequisites
 
-Prior to running this lab, you must have a Bluemix account and setup the IBM Containers command line locally.  Instructions are available in [prereqs](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/0-prereqs.md).  You must have also completed [lab 1](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/1-Intro-to-IBM-Containers-and-Docker.md).
+Prior to running this lab, you must have a Bluemix account and setup the IBM Containers command line locally.  Instructions are available in [prereqs](https://github.com/bainsy88/containers-denmark/blob/master/0-prereqs.md).  You must have also completed [lab 1](https://github.com/bainsy88/containers-denmark/blob/master/1-Intro-to-IBM-Containers-and-Docker.md).
 
 If you are on a trial account, you will want to ensure that you have removed all non-essential containers, as these will impact your quota whether they are running or not.  These can be removed through the Bluemix UI or IBM Containers CLI.
 
@@ -130,13 +130,13 @@ To solve this issue, IBM Containers provides **Vulnerability Advisor** (VA), a p
 
 1. Go to the [Bluemix Dashboard](https://console.ng.bluemix.net/?direct=classic/#/resources) and click on **CATALOG**.
 
-![catalog](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/7-catalog.jpg)
+![catalog](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/7-catalog.jpg)
 
 2. You can filter the list by clicking on the "Containers" check box on the left hand navigation.  Click on the purple icon for **Let's Chat**.  This is the Let's Chat image that you pulled from the public DockerHub registry, tagged with your namespace, and pushed into your private registry.
 
   You will see a pop-up with the vulnerability assessment shown inline.  This is a red/yellow/green scale.  Your Let's Chat image has a red status of **Deployment Blocked**.  
 
-![letschat](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/8-va-lets-chat.jpg)
+![letschat](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/8-va-lets-chat.jpg)
 
 3. Click on the **View the vulnerability report for this image** to see the vulnerability assessment in full detail. The details page has two tabs: **Vulnerable Packages** and **Policy Violations**.  
 
@@ -144,9 +144,9 @@ To solve this issue, IBM Containers provides **Vulnerability Advisor** (VA), a p
 
   The *Policy Violations* tab shows you how the image compares against your organization's security policies.  This will show the number of rules the image was validated against and any possible policy violations.  Your Mongo image should show around 27 policy rules with 2 associated policy violations (being Password Age and Password Length).  
 
-![imagedetail](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/9-va-lets-chat-details.jpg)
+![imagedetail](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/9-va-lets-chat-details.jpg)
 
-![imagedetail2](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/10-va-lets-chat-details.jpg)
+![imagedetail2](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/10-va-lets-chat-details.jpg)
 
 4. From the vulnerability report page, click the **Back to image creation** link. As a Bluemix Organization Manager, you can click on **Manage your org's policies**.  Here you are presented with two boxes - **Deployment Settings for Containers** and **Image Deployment Impact**.  
 
@@ -154,15 +154,15 @@ To solve this issue, IBM Containers provides **Vulnerability Advisor** (VA), a p
 
   The *Image Deployment Impact* shows a summary view of the state of all images in your registry.  Images can have statuses of *Deployment Blocked*, *Deploy with Caution*, and *Safe to Deploy*.  This gives you a quick look into which images are troublesome and which images are secure across your entire registry.
 
-![vapolicymgr](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/11-va-policy-mgr-defaults.jpg)
+![vapolicymgr](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/11-va-policy-mgr-defaults.jpg)
 
   You will note that the default action is to **Block** deployments that have vulnerabilities.  For our demonstration, select **Warn** for all three situations and click the **SAVE** button.  You will see the **Image Deployment Impact** window recalculate in real time the security posture of the images in your private registry, based on the changes to the policy manager in Vulnerability Advisor.  Click the **Back to image creation** link.
 
-![recalcva](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/12-va-policy-mgr-recalc.jpg)
+![recalcva](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/12-va-policy-mgr-recalc.jpg)
 
 5. You will now see that you can **Deploy with Caution**.
 
-![caution](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/13-deploy-caution.jpg)
+![caution](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/13-deploy-caution.jpg)
 
 You have reviewed your pushed images, which were sourced from a public repository, and can now deploy them on your hosted Bluemix account.  This is a key step in making sure you are running the code which you expect to be running and you are not opening your organization up to security issues, at the expense of agility.  You still want to stay secure, even when moving at light-speed!
 
@@ -256,9 +256,9 @@ $ cf ic ps
 5. Check out your running app in your browser, at the IP you just bound.  Remember to use port `8080`!  
   **Note**: Based on the `sleep` statement you built into the Let's Chat container, you will need to wait at least 60 seconds before the Let's Chat application will be available.
 
-![letschat1](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/14-lets-chat.jpg)
-![letschat2](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/15-lets-chat.jpg)
-![letschat3](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/16-lets-chat.jpg)
+![letschat1](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/14-lets-chat.jpg)
+![letschat2](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/15-lets-chat.jpg)
+![letschat3](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/16-lets-chat.jpg)
 
 ## Task 4: Cleanup
 

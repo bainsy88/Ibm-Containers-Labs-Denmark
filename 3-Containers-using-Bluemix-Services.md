@@ -24,34 +24,34 @@ In lab 2, we used a MongoDB that was running inside a container.  This was fast 
 
  1. Go to the [Bluemix Dashboard](https://console.ng.bluemix.net/?direct=classic/#/resources) and click on **CREATE APP**.
 
-![create](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/17-create-app.jpg)
+![create](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/17-create-app.jpg)
 
  2. Click on **WEB** app.  Select **SDK for Node.js** and **CONTINUE**.
 
-![web](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/18-web.jpg)
-![node](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/19-sdk-node.jpg)
+![web](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/18-web.jpg)
+![node](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/19-sdk-node.jpg)
 
  3. Enter a unique name for your application and click **FINISH**.  This must be unique across all the entire Bluemix region your are working in.  For instance, "testapp" is a less than desirable name.  Something like "[YOUR_NAME]-bridge-app" is much better.  This will become the hostname for your app once deployed on Bluemix.
 
 **NOTE:** You will not have a drop down box for domain name unless you have multiple domains defined inside Bluemix.
 
-![name](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/20-app-name-new.jpg)
+![name](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/20-app-name-new.jpg)
 
  4. Once you're application has been deployed and you are taken to the **Getting Started** page, click on the **Overview** tab on the left.
 
-![overview](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/21-app-created.jpg)
+![overview](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/21-app-created.jpg)
 
  5. Now you will need to bind a MongoDB service instance to your application.  This will then expose the credentials to your container at runtime.  Click on **ADD A SERVICE OR API**.
 
-![servuce](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/22-add-service.jpg)
+![servuce](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/22-add-service.jpg)
 
  6. Search for or scroll to **MongoDB by Compose** and click on it.
 
-![mongodb](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/23-mongo.jpg)
+![mongodb](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/23-mongo.jpg)
 
  7. The credentials that you will need to enter on this page will be shared with you during the lab.  These credentials are Host, Port, Username, and Password.  Enter the provided credentials and click **CREATE**.  All other defaults on the page are acceptable.
 
-![mongoinfo](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/24-mongo-connection.jpg)
+![mongoinfo](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/24-mongo-connection.jpg)
 
 - **Host:** xxx.candidate.53.mongolayer.com
 - **Port:** 10795
@@ -62,7 +62,7 @@ In lab 2, we used a MongoDB that was running inside a container.  This was fast 
 
  8. Once you are prompted to restage your application, click **RESTAGE** and wait a few moments for your application to be running again.
 
-![restage](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/25-restage.jpg)
+![restage](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/25-restage.jpg)
 
  9. Since you will be using some pre-built automation to deploy your application, you will need to rename your bridge application to a more standard name.  This will only change the application name inside your space and not the hostname (which is the property that must be unique across all of the Bluemix region).
 
@@ -70,8 +70,8 @@ In lab 2, we used a MongoDB that was running inside a container.  This was fast 
 
   Your application data in the UI should reflect this naming change.  Note that your bound hostname did not change at all.
 
-![rename](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/26-app-rename.jpg)
-![name](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/27-app-rename.jpg)
+![rename](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/26-app-rename.jpg)
+![name](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/27-app-rename.jpg)
 
 Now you've created the necessary services for your container to leverage Mongo as a Service!
 
@@ -87,11 +87,11 @@ Previous labs walked you through manually deploying containers on Bluemix from s
 
 2. There is a lot more detail on containers, Let's Chat, and deploying on Bluemix.  But you've already done the pre-requisites so just click on the **Deploy to Bluemix** button for an even easier deployment.
 
-![LetsChat1](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/lets-chat-deploy1.jpg)
+![LetsChat1](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/lets-chat-deploy1.jpg)
 
 3. You are taken to a new page which will require you to login using your Bluemix credentials.  You may need to setup your Jazz account if this is your first time.  If so, simply click **Log in** and you will be taken through the appropriate steps to create your shortname.
 
-![LetsChat2](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/lets-chat-deploy2.jpg)
+![LetsChat2](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/lets-chat-deploy2.jpg)
 
 4. Once you are provided with the option to deploy, select an appropriate and unique app name, along with the following from the dropdowns:
   - Region: IBM Bluemix US South
@@ -100,7 +100,7 @@ Previous labs walked you through manually deploying containers on Bluemix from s
 
 5. Click **DEPLOY** and you will be taken to another page where you can watch the live deployment of your container-based application, all from a pre-built repository without ever needing to touch the code.
 
-![LetsChat3](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/lets-chat-deploy3.jpg)
+![LetsChat3](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/lets-chat-deploy3.jpg)
 
 As the automation goes through forking the project into your own account, setting up a pipeline for your account, and building & deploying those images on Bluemix, you will be updated in the UI.  Once the status page returns complete after a few minutes, you can move on to the next Task.
 
@@ -108,17 +108,17 @@ As the automation goes through forking the project into your own account, settin
 
 1. Go to the [Bluemix Dashboard](https://console.ng.bluemix.net/?direct=classic/#/resources) and view your deployed containers.  Click on the container called 'lets-chat-a_1'.
 
-![LetsChat1](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/lets-chat1.jpg)
+![LetsChat1](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/lets-chat1.jpg)
 
  * Alternatively, you can see this from the Bluemix UI or the IBM Containers CLI via the `cf ic ps` command.  Go to http://[YOUR_PUBLIC_IP]:8080 in your browser and you've got your web app up & running!
 
 2. Right click on port 8080 and select 'Open in new tab'.
 
-![LetsChat2](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/lets-chat2.jpg)
+![LetsChat2](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/lets-chat2.jpg)
 
 3. You can now create a new account that will remain persistent in the MongoDB Service.
 
-![LetsChat3](https://github.com/crosen188/ibm-containers-interconnect-2016/blob/master/screenshots/lets-chat3.jpg)
+![LetsChat3](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/lets-chat3.jpg)
 
 4. Now every change that would come into your repository can kick off a new Docker image build and push that image into deployment through the dev/test/production cycle.  The delivery pipelines can be configured to automatically or manually build, deploy, and move images throughout multiple stages.  It's all up to you!
 
