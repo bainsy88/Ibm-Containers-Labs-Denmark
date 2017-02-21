@@ -1,7 +1,5 @@
 # IBM Containers Hands-on Lab
-[InterConnect 2016] (https://www.ibm.com/cloud-computing/us/en/interconnect/) - Labs and tutorials used for IBM Containers, a hosted Docker-based container service on IBM Bluemix.
-
-![InterConnect 2016](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/interconnect2016.jpg "InterConnect 2016")
+Labs and tutorials used for IBM Containers, a hosted Docker-based container service on IBM Bluemix.
 
 ## What is IBM Containers?
 
@@ -29,23 +27,12 @@ In this lab, you will learn how to get started using IBM Containers, a hosted of
 
 In this lab, you will learn how to push images to your hosted private registry on Bluemix, evaluate security vulnerabilities for your pushed images, and run an application with two linked container images.  
 
-## Lab 3. [Containers using Bluemix Services](3-Containers-using-Bluemix-Services.md)  
-**Difficulty**: Intermediate  
-**Time Required**: 30 minutes
-
-In this lab, you will learn how to bind Bluemix Services to Docker containers, deploy existing applications with one-click via the *Deploy to Bluemix Button*, and understand how the IBM Bluemix DevOps Pipeline can build & deploy your container images automatically.
-
-## Lab 4: [Container Group Scaling and Recoverability](4-Container-Group-Scaling-and-Recoverability.md)
+## Lab 3: [Container Group Scaling and Recoverability](4-Container-Group-Scaling-and-Recoverability.md)
 **Difficulty**: Intermediate  
 **Time Required**: 20 minutes
 
 In this lab, you will create a container recovery group, and understand how scalability is achieved via a load balancer that is automatically inserted front ending the container instances. We will then look at how instances are automatically recovered.
 
-## Lab 5 (stretch assignment): [Zero-Downtime with the Active Deployment Service](5-Zero-Downtime-with-Active-Deployment-CF.md)
-**Difficulty**: Intermediate  
-**Time Required**: 20 minutes
-
-In this lab, you will leverage the Active Deploy service to perform maintenance on a Cloud Foundry app without requiring any downtime to your production app. Active Deploy uses standard Bluemix technology and techniques (and is also called Red/Black deployment).
 
 # Legal Disclaimer:
 IBM’s statements regarding its plans, directions, and intent are subject to change or withdrawal without notice at IBM’s sole discretion.
