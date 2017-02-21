@@ -21,7 +21,7 @@ If you are on a trial account, you will want to ensure that you have removed all
 
 You will tag the previously downloaded images with your unique namespace so you can upload those images to your public registry hosted on Bluemix.
 
-1.   Make note of your namespace:  
+1. Make note of your namespace:  
 
   $ cf ic namespace get
 
@@ -134,8 +134,6 @@ To solve this issue, IBM Containers provides **Vulnerability Advisor** (VA), a p
 
   You will note that the default action is to **Warn** deployments that have vulnerabilities. Click the **Back to Catalog** link.
 
-![recalcva](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/12-va-policy-mgr-recalc.jpg)
-
 5. To make the image safe to deploy, we can rebuild the images and update the vulnerable packages
 
 
@@ -178,8 +176,6 @@ We are now going to use `cf ic build` to build the image in the cloud and push t
 
 
 6. If you go back to the UI and refresh you will see that the image is **Safe to Deploy**.
-
-![caution](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/13-deploy-caution.jpg)
 
 You have reviewed your pushed images, which were sourced from a public repository, and can now deploy them on your hosted Bluemix account.  This is a key step in making sure you are running the code which you expect to be running and you are not opening your organization up to security issues, at the expense of agility.  You still want to stay secure, even when moving at light-speed!
 
