@@ -25,7 +25,7 @@ Prior to running this lab, you must have completed the pre-reqs. This lab will a
     - Enter the space name.
     - Click Add.
 
-  ![addspace](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/35-add-space.jpg)
+  ![addspace](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/35-add-space.jpg)
 
 2. Now we have a second space we need to make sure they are assigned to separate availability zones.
 
