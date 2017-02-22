@@ -285,6 +285,6 @@ $ cf ic group rm -f spring-boot
 
 ####Let's recap what you've accomplished thus far in this lab:
 
-- Created a Second Bluemix Space in Your Org]
+- Created a Second Bluemix Space in Your Org
 - Created a Container Group in Each Availability Zone
 - Verified high availability by deleting the group in space 2 and confirming we could still serve requests
