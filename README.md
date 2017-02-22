@@ -33,6 +33,12 @@ In this lab, you will learn how to push images to your hosted private registry o
 
 In this lab, you will create a container recovery group, and understand how scalability is achieved via a load balancer that is automatically inserted front ending the container instances. We will then look at how instances are automatically recovered.
 
+## Lab 4: [Container Group High Availability](4-Container-Group-High-and-Availability.md)
+**Difficulty**: Intermediate  
+**Time Required**: 20 minutes
+
+In this lab, you will create two instances of a container recovery group, and understand how high availability is acheived by having each group run in a different Availability Zone with the same route. We then look at how removing one of the groups does not cause an outage.
+
 
 # Legal Disclaimer:
 IBM’s statements regarding its plans, directions, and intent are subject to change or withdrawal without notice at IBM’s sole discretion.
