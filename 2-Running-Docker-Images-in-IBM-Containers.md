@@ -105,22 +105,22 @@ To solve this issue, IBM Containers provides **Vulnerability Advisor** (VA), a p
 
 1. Go to the [Bluemix Catalog](https://console.eu-gb.bluemix.net/catalog) and click on **CONTAINERS**.
 
-![catalog](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/7-catalog.jpg)
+  ![catalog](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/7-catalog.jpg)
 
 2. Click on the purple icon for **Let's Chat**.  This is the Let's Chat image that you pulled from the public DockerHub registry, tagged with your namespace, and pushed into your private registry.
 
   You will see a pop-up with the vulnerability assessment shown inline.  This is a red/yellow/green scale.  Your Let's Chat image has a yellow status of **Deploy with Caution**.
 
-![letschat](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/8-va-lets-chat.jpg)
+  ![letschat](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/8-va-lets-chat.jpg)
 
 3. Click on the **View report** to see the vulnerability assessment in full detail.
 
   For example the *Vulnerable Packages* tab shows you the number of packages scanned, the number of vulnerable packages present in your image, and the number of relevant security notices attached to any of those vulnerable packages.
   You can see that some of the packages are vunerable.
 
-![imagedetail](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/9-va-lets-chat-details.jpg)
+  ![imagedetail](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/9-va-lets-chat-details.jpg)
 
-![imagedetail2](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/10-va-lets-chat-details.jpg)
+  ![imagedetail2](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/10-va-lets-chat-details.jpg)
 
 4. From the vulnerability report page, click the **Back to Catalog** link. As a Bluemix Organization Manager, you can click on **Manage policies**.
 
@@ -130,14 +130,13 @@ To solve this issue, IBM Containers provides **Vulnerability Advisor** (VA), a p
 
   The containers tab can be used to show a similar view showing the state of running containers, rather than images in the registry.
 
-![vapolicymgr](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/11-va-policy-mgr-defaults.jpg)
+  ![vapolicymgr](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/11-va-policy-mgr-defaults.jpg)
 
   You will note that the default action is to **Warn** deployments that have vulnerabilities. Click the **Back to Catalog** link.
 
 5. To make the image safe to deploy, we can rebuild the images and update the vulnerable packages
 
-
-To do so, create a new directory called `wrapper` at your Terminal window.  
+  To do so, create a new directory called `wrapper` at your Terminal window.  
   ```
   mkdir wrapper
   ```
@@ -159,7 +158,7 @@ To do so, create a new directory called `wrapper` at your Terminal window.
     - `RUN` runs the following command in the container. In this case we are upgrading the vulnerbale packages.  
     - Switch the user back to node, which is the user we want to run the application as.  
 
-We are now going to use `cf ic build` to build the image in the cloud and push the image into the registry in one operation.
+  We are now going to use `cf ic build` to build the image in the cloud and push the image into the registry in one operation.
 
   **NOTE:** There is a period "." at the end of this docker build command that is required for the command to run.
 
@@ -169,7 +168,7 @@ We are now going to use `cf ic build` to build the image in the cloud and push t
 
   Understanding this command's components:  
     - The `cf ic build` is standard from the cf ic CLI.  
-    - The `registry.eu-gb.bluemix.net` is the fully qualified domain name path to the Registry server running for the IBM Bluemix US South region.  
+    - The `registry.eu-gb.bluemix.net` is the fully qualified domain name path to the Registry server running for the IBM   Bluemix US South region.  
     - The `NAMESPACE` is each user's unique namespace and identifies your private registry.  
     - The `lets-chat` is the name given to this newly created image.  
     - The `.` specifies that the build command is running using the Dockerfile in this directory.  
@@ -177,7 +176,7 @@ We are now going to use `cf ic build` to build the image in the cloud and push t
 
 6. If you go back to the UI and refresh you will see that the image is **Safe to Deploy**.
 
-You have reviewed your pushed images, which were sourced from a public repository, and can now deploy them on your hosted Bluemix account.  This is a key step in making sure you are running the code which you expect to be running and you are not opening your organization up to security issues, at the expense of agility.  You still want to stay secure, even when moving at light-speed!
+  You have reviewed your pushed images, which were sourced from a public repository, and can now deploy them on your hosted Bluemix account.  This is a key step in making sure you are running the code which you expect to be running and you are not opening your organization up to security issues, at the expense of agility.  You still want to stay secure, even when moving at light-speed!
 
 ## Task 3: Run your web app on Bluemix
 
