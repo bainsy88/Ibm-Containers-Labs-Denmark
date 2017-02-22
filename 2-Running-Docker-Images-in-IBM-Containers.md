@@ -105,22 +105,22 @@ To solve this issue, IBM Containers provides **Vulnerability Advisor** (VA), a p
 
 1. Go to the [Bluemix Catalog](https://console.eu-gb.bluemix.net/catalog) and click on **CONTAINERS**.
 
-  ![catalog](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/7-catalog.jpg)
+  ![catalog](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/7-catalog.jpg)
 
 2. Click on the purple icon for **Let's Chat**.  This is the Let's Chat image that you pulled from the public DockerHub registry, tagged with your namespace, and pushed into your private registry.
 
   You will see a pop-up with the vulnerability assessment shown inline.  This is a red/yellow/green scale.  Your Let's Chat image has a yellow status of **Deploy with Caution**.
 
-  ![letschat](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/8-va-lets-chat.jpg)
+  ![letschat](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/8-va-lets-chat.jpg)
 
 3. Click on the **View report** to see the vulnerability assessment in full detail.
 
   For example the *Vulnerable Packages* tab shows you the number of packages scanned, the number of vulnerable packages present in your image, and the number of relevant security notices attached to any of those vulnerable packages.
   You can see that some of the packages are vulnerable.
 
-  ![imagedetail](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/9-va-lets-chat-details.jpg)
+  ![imagedetail](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/9-va-lets-chat-details.jpg)
 
-  ![imagedetail2](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/10-va-lets-chat-details.jpg)
+  ![imagedetail2](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/10-va-lets-chat-details.jpg)
 
 4. From the vulnerability report page, click the **Back to Catalog** link. As a Bluemix Organization Manager, you can click on **Manage policies**.
 
@@ -130,7 +130,7 @@ To solve this issue, IBM Containers provides **Vulnerability Advisor** (VA), a p
 
   The containers tab can be used to show a similar view showing the state of running containers, rather than images in the registry.
 
-  ![vapolicymgr](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/11-va-policy-mgr-defaults.jpg)
+  ![vapolicymgr](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/11-va-policy-mgr-defaults.jpg)
 
   You will note that the default action is to **Warn** deployments that have vulnerabilities. Click the **Back to Catalog** link.
 
@@ -267,9 +267,9 @@ $ cf ic ps
 5. Check out your running app in your browser, at the IP you just bound.  Remember to use port `8080`!  
   **Note**: Based on the `sleep` statement you built into the Let's Chat container, you will need to wait at least 60 seconds before the Let's Chat application will be available.
 
-![letschat1](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/14-lets-chat.jpg)
-![letschat2](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/15-lets-chat.jpg)
-![letschat3](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/16-lets-chat.jpg)
+![letschat1](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/14-lets-chat.jpg)
+![letschat2](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/15-lets-chat.jpg)
+![letschat3](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/16-lets-chat.jpg)
 
 ## Task 4: Cleanup
 

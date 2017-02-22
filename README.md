@@ -57,7 +57,7 @@ The workshops, sessions and materials have been prepared by IBM or the session s
 
 All customer examples described are presented as illustrations of how those customers have used IBM products and the results they may have achieved.  Actual environmental costs and performance characteristics may vary by customer.  Nothing contained in these materials is intended to, nor shall have the effect of, stating or implying that any activities undertaken by you will result in any specific sales, revenue growth or other results.
 
-   © Copyright IBM Corporation 2015. All rights reserved.
+   © Copyright IBM Corporation 2017. All rights reserved.
 
 •	U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
 
