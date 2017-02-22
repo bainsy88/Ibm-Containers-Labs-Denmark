@@ -27,7 +27,7 @@ Prior to running this lab, you must have completed the pre-reqs. This lab will a
 
   ![addspace](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/35-add-space.jpg)
 
-2. Now we have a second space we need to make sure they are assigned to seperate availability zones.
+2. Now we have a second space we need to make sure they are assigned to separate availability zones.
 
   ```
   $ cf ic info
@@ -75,7 +75,7 @@ Namespace                bainsy88
 Availability Zone        ams03-01
 ```
 
-As you can see above the second space is in the ams03-01 availabiltity zone. This means that any contianers started in this space will be running in the Amsterdam datacentre.
+As you can see above the second space is in the ams03-01 availability zone. This means that any containers started in this space will be running in the Amsterdam datacentre.
 
 If the Availability Zone on the second space is the same as first space you can run `cf ic reprovision -f [ams03-01 or lon02-01]` to reprovision the second space to the other Availability Zone.
 
@@ -234,7 +234,7 @@ You will start to see the same instances recycle after a while depending on how 
 0254ec35-6fb5-4514-9aca-bef3fcdc3215 spring-boot                         CREATE_COMPLETE                     2017-02-22 14:29:01 +0000 GMT                                                    8080
   ```
 
-2. We will remove the group that is running in the currently targetted space. This is to simulate an outage in the Amsterdam Datacentre 
+2. We will remove the group that is running in the currently targeted space. This is to simulate an outage in the Amsterdam Datacentre 
 
   ```
 $ cf ic group rm -f spring-boot
