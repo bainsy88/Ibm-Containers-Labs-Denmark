@@ -6,10 +6,10 @@
 
 > **Tasks**:
 >- [Prerequisites](#prerequisites)
-- [Task 1: Create a Second Bluemix Space in Your Org](#task-1-Setup-a-second-bluemix-space-in-your-org)
+- [Task 1: Create a Second Bluemix Space in Your Org](#task-1-setup-a-second-bluemix-space-in-your-org)
 - [Task 2: Create a Container Group in Each Availability Zone](#task-2-create-a-container-group-in-each-availability-zone)
 - [Task 3: Verify Scalability](#task-3-verify-scalability)
-- [Task 4: Verify High Availability](#task-4-verify-high-Availability)
+- [Task 4: Verify High Availability](#task-4-verify-high-availability)
 
 ## Prerequisites
 
@@ -75,7 +75,7 @@ Namespace                bainsy88
 Availability Zone        ams03-01
 ```
 
-As you can see above the second space is in the Amsterdam availabiltity zone. This means that any contianers started in this space will be running in the amsterdam datacentre.
+As you can see above the second space is in the ams03-01 availabiltity zone. This means that any contianers started in this space will be running in the Amsterdam datacentre.
 
 If the Availability Zone on the second space is the same as first space you can run `cf ic reprovision -f [ams03-01 or lon02-01]` to reprovision the second space to the other Availability Zone.
 
@@ -272,7 +272,7 @@ Space:          [space1_name]
   ```
   Group ID                               Name          Status            Created                         Updated                         Port   
 76f0178b-74a4-48eb-bd13-4370897e6050   spring-boot   UPDATE_COMPLETE   2017-02-22 11:34:01 +0000 GMT   2017-02-22 11:44:02 +0000 GMT   808
-  
+  ```
 ## Cleanup
 
 To continue with another lab, you need to clean up your container group.  This can be done through the UI and the **DELETE** button on each container, or you can do this through the CLI with the following command
