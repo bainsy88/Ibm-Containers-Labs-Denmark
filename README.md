@@ -27,7 +27,7 @@ In this lab, you will learn how to get started using IBM Containers, a hosted of
 
 In this lab, you will learn how to push images to your hosted private registry on Bluemix, evaluate security vulnerabilities for your pushed images, and run an application with two linked container images.  
 
-## Lab 3: [Container Group Scaling and Recoverability](4-Container-Group-Scaling-and-Recoverability.md)
+## Lab 3: [Container Group Scaling and Recoverability](3-Container-Group-Scaling-and-Recoverability.md)
 **Difficulty**: Intermediate  
 **Time Required**: 20 minutes
 
