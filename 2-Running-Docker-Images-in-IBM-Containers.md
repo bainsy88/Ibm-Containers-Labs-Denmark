@@ -116,7 +116,7 @@ To solve this issue, IBM Containers provides **Vulnerability Advisor** (VA), a p
 3. Click on the **View report** to see the vulnerability assessment in full detail.
 
   For example the *Vulnerable Packages* tab shows you the number of packages scanned, the number of vulnerable packages present in your image, and the number of relevant security notices attached to any of those vulnerable packages.
-  You can see that some of the packages are vunerable.
+  You can see that some of the packages are vulnerable.
 
   ![imagedetail](https://github.com/bainsy88/containers-denmark/blob/master/screenshots/9-va-lets-chat-details.jpg)
 
@@ -155,7 +155,7 @@ To solve this issue, IBM Containers provides **Vulnerability Advisor** (VA), a p
   Understanding the Dockerfile:  
     - The `FROM` line specifies what image to base our image on.  
     - `USER` is the equivalent of `su` and is required so the build has privileges to run the next command.  
-    - `RUN` runs the following command in the container. In this case we are upgrading the vulnerbale packages.  
+    - `RUN` runs the following command in the container. In this case we are upgrading the vulnerable packages.  
     - Switch the user back to node, which is the user we want to run the application as.  
 
   We are now going to use `cf ic build` to build the image in the cloud and push the image into the registry in one operation.
