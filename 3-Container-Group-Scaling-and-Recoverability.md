@@ -25,12 +25,12 @@ Prior to running this lab, you must have completed the pre-reqs.
 2. Upload the Docker image from the Docker public registry to Bluemix as we did earlier using the following command.
 
   ```
-	$ cf ic cpi ragsns/spring-boot registry.ng.bluemix.net/$CONTAINER_NAMESPACE/spring-boot
+	$ cf ic cpi ragsns/spring-boot registry.eu-gb.bluemix.net/$CONTAINER_NAMESPACE/spring-boot
 Sending build context to Docker daemon 2.048 kB
 Step 0 : FROM ragsns/spring-boot
  ---> d8dc5ff8d27b
 Successfully built d8dc5ff8d27b
-The push refers to a repository [registry.ng.bluemix.net/ragsns/spring-boot] (len: 1)
+The push refers to a repository [registry.eu-gb.bluemix.net/ragsns/spring-boot] (len: 1)
 d8dc5ff8d27b: Image already exists 
 3565bce48566: Image already exists 
 bc1666c40f44: Image already exists 
@@ -56,7 +56,7 @@ Digest: sha256:8a450a05521481b3df8c052f84c1888a7bc1406b0ee2b4ab0146d4dede043c0c
 1. Create a Container Recovery Group with 3 (at least greater than 1) instances and port 8080 exposed with the following command. 
 
   ```
-  $ cf ic group create  -p 8080 --name spring-boot --hostname spring-boot-$CONTAINER_NAMESPACE --domain mybluemix.net --memory 512 --max 3 --desired 3 --auto registry.ng.bluemix.net/$CONTAINER_NAMESPACE/spring-boot
+  $ cf ic group create  -p 8080 --name spring-boot --hostname spring-boot-$CONTAINER_NAMESPACE --domain eu-gb.mybluemix.net --memory 512 --max 3 --desired 3 --auto --anti registry.eu-gb.bluemix.net/$CONTAINER_NAMESPACE/spring-boot
   Create group in progress
 Created group spring-boot (id: 123dbe80-8ae8-434c-ba79-33a64aa82636)
 Minimum container instances: 0
@@ -77,41 +77,79 @@ Desired container instances: 3
   ```
   $ cf ic group inspect spring-boot
 {
-    "Autorecovery": "true", 
+    "AntiAffinity": true, 
+    "Autorecovery": true, 
+    "AvailabilityZone": "docker", 
     "Cmd": [], 
-    "Creation_time": "2015-12-14T16:39:12Z", 
+    "Creation_time": "2017-02-22T09:35:09", 
     "Env": [
-        "sgroup_name=spring-boot", 
-        "metrics_target=logmet.opvis.bluemix.net:9095", 
+        "HTTP_MONITOR=true", 
+        "HTTP_MONITOR_PATH=/", 
+        "HTTP_MONITOR_RC_LIST=200,201,202,204,300,301,302,401,403,404", 
+        "SESSION_AFFINITY=false", 
+        "group_id=d001d699-ddc7-4668-adb6-8415599378ba", 
+        "ibmcon_UL_nofile=", 
+        "loadbalancer_fip=100.101.103.106", 
+        "loadbalancer_vip=172.30.0.8", 
         "logging_password=", 
-        "tagseparator=_", 
-        "tenant_id=49911e9c-cf3e-4913-9e20-ff52ed6d34e3", 
-        "space_id=49911e9c-cf3e-4913-9e20-ff52ed6d34e3", 
-        "logstash_target=logmet.opvis.bluemix.net:9091", 
-        "sgroup_id=241262d9-90a4-4764-bf0a-c48ef8e13b36", 
-        "tagformat=tenant_id group_id uuid", 
-        "group_id=241262d9-90a4-4764-bf0a-c48ef8e13b36", 
-        "metadata_hidden_hostname=instance-00122559"
+        "logstash_target=logs.eu-gb.opvis.bluemix.net:9091", 
+        "metrics_target=metrics.eu-gb.opvis.bluemix.net:9095", 
+        "routing_mode=map", 
+        "sgroup_id=d001d699-ddc7-4668-adb6-8415599378ba", 
+        "sgroup_name=spring-boot", 
+        "space_id=91e12e13-a787-4048-9f91-741564625b8a", 
+        "tenant_id=e7343bea394742698fa10e9792c0eb89"
     ], 
-    "Id": "241262d9-90a4-4764-bf0a-c48ef8e13b36", 
-    "Image": "6128feda-2f27-442c-a962-8859a43ee69e", 
+    "Id": "d001d699-ddc7-4668-adb6-8415599378ba", 
+    "Image": "sha256:74030e4c63304569beec3833064f97c54f49b32a184101869cf2d16d61029874", 
+    "ImageName": "registry.eu-gb.bluemix.net/ragsns/spring-boot:latest", 
+    "Loadbalancer": {
+        "health_monitors": [
+            {
+                "enabled": true, 
+                "type": "tcp"
+            }, 
+            {
+                "enabled": true, 
+                "path": "/", 
+                "response_codes": "200,201,202,204,300,301,302,401,403,404", 
+                "type": "http"
+            }
+        ], 
+        "intermediate_ip_address": "100.101.103.106", 
+        "members": [
+            {
+                "address": "172.30.0.10", 
+                "port": 8080, 
+                "status": "ACTIVE"
+            }, 
+            {
+                "address": "172.30.0.11", 
+                "port": 8080, 
+                "status": "ACTIVE"
+            }, 
+            {
+                "address": "172.30.0.9", 
+                "port": 8080, 
+                "status": "ACTIVE"
+            }
+        ], 
+        "private_ip_address": "172.30.0.8", 
+        "session_affinity": false
+    }, 
     "Memory": 512, 
     "Name": "spring-boot", 
     "NumberInstances": {
         "CurrentSize": 3, 
         "Desired": 3, 
         "Max": 3, 
-        "Min": 0
+        "Min": 1
     }, 
     "Port": 8080, 
     "Route_Status": {
-        "in_progress": false, 
-        "message": "registered route successfully", 
-        "successful": true
+        "in_progress": true
     }, 
-    "Routes": [
-        "spring-boot-ragsns.mybluemix.net"
-    ], 
+    "Routes": [], 
     "Status": "CREATE_COMPLETE", 
     "Updated_time": null
 }
@@ -124,7 +162,7 @@ There is a web service endpoint `/env` that we will invoke now as below.
 1. List all the environment variables associated with the application using the following command.
 
   ```
-  $ curl -L spring-boot-$CONTAINER_NAMESPACE.mybluemix.net/env
+  $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env
 Environment : 
 tenant_id = 49911e9c-cf3e-4913-9e20-ff52ed6d34e3
 PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -152,22 +190,22 @@ HOME = /root
 2. We are primarily interested in the `HOSTNAME`. A container recovery group automatically creates a load balancer and load balances amongst these different instances. If you invoke the command repeatedly you must see as many different instances as the size of the container recovery group and no more (in this case three).
 
   ```
-  $ curl -L spring-boot-$CONTAINER_NAMESPACE.mybluemix.net/env | grep HOSTNAME
+  $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
   HOSTNAME = instance-000abaec
   ```
 
   ```
-  $ curl -L spring-boot-$CONTAINER_NAMESPACE.mybluemix.net/env | grep HOSTNAME
+  $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
   HOSTNAME = instance-00122559
   ```
     ```
-  $ curl -L spring-boot-$CONTAINER_NAMESPACE.mybluemix.net/env | grep HOSTNAME
+  $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
   HOSTNAME = instance-0010b64e
   ```
 You will start to see the same instances recycle after a while depending on how the load balancer balances the load.
 
   ```
-  $ curl -L spring-boot-$CONTAINER_NAMESPACE.mybluemix.net/env | grep HOSTNAME
+  $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
   HOSTNAME = instance-00122559
   ```
 
@@ -178,9 +216,9 @@ You will start to see the same instances recycle after a while depending on how 
   ```
   $ cf ic group instances spring-boot
 Container Id                         Name                                                  Group                               Image                                             Created                             Updated                             State                               Private IP                          Port
-1dc25949-b438-475b-8a63-40fab21b2700 sp-hwuf-wqvsqk7ywu3v-xs6i2dvhrutr-server-nh33si6nzus7 spring-boot                         registry.ng.bluemix.net/ragsns/spring-boot:latest 2016-02-03 10:05:16 -0500 EST       Running                             172.30.0.222                        8080
-b140192a-620c-4ba0-9d82-53822cb56f21 sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34z3y46o3o6t spring-boot                         registry.ng.bluemix.net/ragsns/spring-boot:latest 2016-02-01 10:22:32 -0500 EST       Running                             172.30.0.173                        8080
-66ad3b7c-de2d-4707-a7a8-f894302e52e7 sp-hwuf-gdh2kugrqbez-6g3x7aumtnk5-server-aj2czsn3ntak spring-boot                         registry.ng.bluemix.net/ragsns/spring-boot:latest 2016-01-23 00:35:17 -0500 EST       Running                             172.30.0.167                        8080
+1dc25949-b438-475b-8a63-40fab21b2700 sp-hwuf-wqvsqk7ywu3v-xs6i2dvhrutr-server-nh33si6nzus7 spring-boot                         registry.eu-gb.bluemix.net/ragsns/spring-boot:latest 2016-02-03 10:05:16 -0500 EST       Running                             172.30.0.222                        8080
+b140192a-620c-4ba0-9d82-53822cb56f21 sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34z3y46o3o6t spring-boot                         registry.eu-gb.bluemix.net/ragsns/spring-boot:latest 2016-02-01 10:22:32 -0500 EST       Running                             172.30.0.173                        8080
+66ad3b7c-de2d-4707-a7a8-f894302e52e7 sp-hwuf-gdh2kugrqbez-6g3x7aumtnk5-server-aj2czsn3ntak spring-boot                         registry.eu-gb.bluemix.net/ragsns/spring-boot:latest 2016-01-23 00:35:17 -0500 EST       Running                             172.30.0.167                        8080
   ```
 
 2. We will stop one of the containers either using the container Id or by issuing a command as below which will extract the container ID of the last container.
@@ -195,17 +233,17 @@ b140192a-620c-4ba0-9d82-53822cb56f21 sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34
   ```
   cf ic group instances spring-boot
 Container Id                         Name                                                  Group                               Image                                             Created                             Updated                             State                               Private IP                          Port
-1dc25949-b438-475b-8a63-40fab21b2700 sp-hwuf-wqvsqk7ywu3v-xs6i2dvhrutr-server-nh33si6nzus7 spring-boot                         registry.ng.bluemix.net/ragsns/spring-boot:latest 2016-02-03 10:05:16 -0500 EST       Running                             172.30.0.222                        8080
-b140192a-620c-4ba0-9d82-53822cb56f21 sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34z3y46o3o6t spring-boot                         registry.ng.bluemix.net/ragsns/spring-boot:latest 2016-02-01 10:22:32 -0500 EST       Running                             172.30.0.173                        8080
-66ad3b7c-de2d-4707-a7a8-f894302e52e7 sp-hwuf-gdh2kugrqbez-6g3x7aumtnk5-server-aj2czsn3ntak spring-boot                         registry.ng.bluemix.net/ragsns/spring-boot:latest 2016-01-23 00:35:17 -0500 EST       Deleted                                                                 8080
+1dc25949-b438-475b-8a63-40fab21b2700 sp-hwuf-wqvsqk7ywu3v-xs6i2dvhrutr-server-nh33si6nzus7 spring-boot                         registry.eu-gb.bluemix.net/ragsns/spring-boot:latest 2016-02-03 10:05:16 -0500 EST       Running                             172.30.0.222                        8080
+b140192a-620c-4ba0-9d82-53822cb56f21 sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34z3y46o3o6t spring-boot                         registry.eu-gb.bluemix.net/ragsns/spring-boot:latest 2016-02-01 10:22:32 -0500 EST       Running                             172.30.0.173                        8080
+66ad3b7c-de2d-4707-a7a8-f894302e52e7 sp-hwuf-gdh2kugrqbez-6g3x7aumtnk5-server-aj2czsn3ntak spring-boot                         registry.eu-gb.bluemix.net/ragsns/spring-boot:latest 2016-01-23 00:35:17 -0500 EST       Deleted                                                                 8080
   ```
 Running the command again should show that the instance has been deleted.
   
   ```
   cf ic group instances spring-boot  
   Container Id                         Name                                                  Group                               Image                                             Created                             Updated                             State                               Private IP                          Port
-1dc25949-b438-475b-8a63-40fab21b2700 sp-hwuf-wqvsqk7ywu3v-xs6i2dvhrutr-server-nh33si6nzus7 spring-boot                         registry.ng.bluemix.net/ragsns/spring-boot:latest 2016-02-03 10:05:16 -0500 EST       Running                             172.30.0.222                        8080
-b140192a-620c-4ba0-9d82-53822cb56f21 sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34z3y46o3o6t spring-boot                         registry.ng.bluemix.net/ragsns/spring-boot:latest 2016-02-01 10:22:32 -0500 EST       Running                             172.30.0.173                        8080
+1dc25949-b438-475b-8a63-40fab21b2700 sp-hwuf-wqvsqk7ywu3v-xs6i2dvhrutr-server-nh33si6nzus7 spring-boot                         registry.eu-gb.bluemix.net/ragsns/spring-boot:latest 2016-02-03 10:05:16 -0500 EST       Running                             172.30.0.222                        8080
+b140192a-620c-4ba0-9d82-53822cb56f21 sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34z3y46o3o6t spring-boot                         registry.eu-gb.bluemix.net/ragsns/spring-boot:latest 2016-02-01 10:22:32 -0500 EST       Running                             172.30.0.173                        8080
   ```
   
 
@@ -215,24 +253,24 @@ b140192a-620c-4ba0-9d82-53822cb56f21 sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34
   $ cf ic ps -a
   CONTAINER ID        IMAGE                                                           COMMAND             CREATED             STATUS                   PORTS                                                      NAMES
 
-  1dc25949-b43        registry.ng.bluemix.net/ragsns/spring-boot:latest               ""                  13 minutes ago      Running 13 minutes ago   8080/tcp                                                   sp-hwuf-wqvsqk7ywu3v-xs6i2dvhrutr-server-nh33si6nzus7
-b140192a-620        registry.ng.bluemix.net/ragsns/spring-boot:latest               ""                  47 hours ago        Running a day ago        8080/tcp                                                   sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34z3y46o3o6t
-b5676e3f-c42        registry.ng.bluemix.net/ragsns/spring-boot:latest               ""                  11 days ago         Running 11 days ago      8080/tcp                                                   sp-hwuf-gdh2kugrqbez-6g3x7aumtnk5-server-aj2czsn3ntak
+1dc25949-b43        registry.eu-gb.bluemix.net/ragsns/spring-boot:latest               ""                  13 minutes ago      Running 13 minutes ago   8080/tcp                                                   sp-hwuf-wqvsqk7ywu3v-xs6i2dvhrutr-server-nh33si6nzus7
+b140192a-620        registry.eu-gb.bluemix.net/ragsns/spring-boot:latest               ""                  47 hours ago        Running a day ago        8080/tcp                                                   sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34z3y46o3o6t
+b5676e3f-c42        registry.eu-gb.bluemix.net/ragsns/spring-boot:latest               ""                  11 days ago         Running 11 days ago      8080/tcp                                                   sp-hwuf-gdh2kugrqbez-6g3x7aumtnk5-server-aj2czsn3ntak
   ```
   
 5. If you re-run the command to get the `HOSTNAME` of the container, it now cycles between three container IDs but with a new instance ID (`instance-0012673b`) as below.
 
   ```
-  $ curl -L spring-boot-$CONTAINER_NAMESPACE.mybluemix.net/env | grep HOSTNAME
+  $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
   HOSTNAME = instance-0012673b
   ```
 
   ```
-  $ curl -L spring-boot-$CONTAINER_NAMESPACE.mybluemix.net/env | grep HOSTNAME
+  $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
   HOSTNAME = instance-00122559
   ```
     ```
-  $ curl -L spring-boot-$CONTAINER_NAMESPACE.mybluemix.net/env | grep HOSTNAME
+  $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
   HOSTNAME = instance-0010b64e
   ```
   
