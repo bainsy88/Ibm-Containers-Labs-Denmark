@@ -104,29 +104,29 @@ First, you will need to pull them down locally from the public [Docker Hub](http
 
 4. Access the Let's Chat application through your browser using the loopback IP address (127.0.0.1).
 
-           In your browser, access http://127.0.0.1:8080 or http://localhost:8080 or http://system_ip_here:8080.  
+  In your browser, access `http://127.0.0.1:8080` or `http://localhost:8080` or `http://system_ip_here:8080`.
+  If you are using Docker Toolbox, run `docker-machine ip` to get your system IP address.
 
 5. You can now stop and remove your local running containers.
 
-        Stop the containers:  
-        ```
-        $ docker stop lets-chat lc-mongo
-        lets-chat
-        lc-mongo
-        ```
+  Stop the containers:  
+  
+      $ docker stop lets-chat lc-mongo
+      lets-chat
+      lc-mongo
 
-        Delete the containers:  
-        ```
-        $ docker rm lets-chat lc-mongo
-        lets-chat
-        lc-mongo
-        ```
+  Delete the containers:  
+        
+      $ docker rm lets-chat lc-mongo
+      lets-chat
+      lc-mongo
+        
 
 ## Task 3: Log into IBM Containers using the CLI
 
 In this task, we will log into the IBM Containers command line to connect to Bluemix running on the IBM Cloud.
 
-1. Back at your Terminal window, configure the Cloud Foundry CLI to work with the nearest IBM Bluemix region.  This ensures you will be working with the US South region of Bluemix.  To use the London datacenter, the API endpoint is "cf api https://api.eu-gb.bluemix.net".
+1. Back at your Terminal window, configure the Cloud Foundry CLI to work with the nearest IBM Bluemix region.  This ensures you will be working with the US South region of Bluemix.  To use the London datacenter, the API endpoint is `https://api.eu-gb.bluemix.net`.
    
         $ cf api https://api.eu-gb.bluemix.net
         Setting api endpoint to https://api.eu-gb.bluemix.net...
@@ -142,15 +142,9 @@ In this task, we will log into the IBM Containers command line to connect to Blu
         Authenticating...
         OK
 
-        Select an org (or press enter to skip):
-        1. osowski@us.ibm.com
-        2. IBM_Containers_Demo_Org
-
-        Org> 2
         Targeted org IBM_Containers_Demo_Org
 
         Targeted space IBM_Containers_Demo_Org
-
 
 
         API endpoint:   https://api.eu-gb.bluemix.net (API version: 2.40.0)   
@@ -158,37 +152,38 @@ In this task, we will log into the IBM Containers command line to connect to Blu
         Org:            IBM_Containers_Demo_Org   
         Space:          IBM_Containers_Demo_Org
 
-3. If you have not previously used the IBM Container service you need to set a namespace, this can be skipped if you have previously used the service.
+3. If you have not previously used the IBM Container service, you need to set a namespace; this can be skipped if you have previously used the service.
         
         $ cf ic namespace set <ENTER_DESIRED_NAMESPACE> 
         <DESIRED_NAMESPACE>
 
-4. Log in to the IBM Container service on Bluemix
+4. Log in to the IBM Container service on Bluemix.
 
-        $ cf ic login
-        Client certificates are being retrieved from IBM Containers...
-        Client certificates are being stored in /Users/osowski/.ice/certs/containers-api.eu-gb.bluemix.net...
-        OK
-        Client certificates were retrieved.
+```
+      $ cf ic login
+      Client certificates are being retrieved from IBM Containers...
+      Client certificates are being stored in /Users/osowski/.ice/certs/containers-api.eu-gb.bluemix.net...
+      OK
+      Client certificates were retrieved.
 
-        Checking local Docker configuration...
-        OK
+      Checking local Docker configuration...
+      OK
 
-        Authenticating with registry at host name registry.ng.bluemix.net
-        OK
-        Your container was authenticated with the IBM Containers registry.
-        Your private Bluemix repository is URL: registry.ng.bluemix.net/ibm_containers_demo
+      Authenticating with registry at host name registry.eu-gb.bluemix.net
+      OK
+      Your container was authenticated with the IBM Containers registry.
+      Your private Bluemix repository is URL: registry.eu-gb.bluemix.net/ibm_containers_demo
 
-        You can choose from two ways to use the Docker CLI with IBM Containers:
+      You can choose from two ways to use the Docker CLI with IBM Containers:
 
-        Option 1: This option allows you to use "cf ic" for managing containers on IBM Containers while still using the Docker CLI directly to manage your local Docker host.
-        	Use this Cloud Foundry IBM Containers plug-in without affecting the local Docker environment:
+      Option 1: This option allows you to use "cf ic" for managing containers on IBM Containers while still using the Docker CLI directly to manage your local Docker host.
+      	      Use this Cloud Foundry IBM Containers plug-in without affecting the local Docker environment:
 
         	Example Usage:
         	cf ic ps
         	cf ic images
 
-        Option 2: Use the Docker CLI directly. In this shell, override the local Docker environment to connect to IBM Containers by setting these variables. Copy and paste the following commands:
+      Option 2: Use the Docker CLI directly. In this shell, override the local Docker environment to connect to IBM Containers by setting these variables. Copy and paste the following commands:
         	Note: Only Docker commands followed by (Docker) are supported with this option.
 
  	        export DOCKER_HOST=tcp://containers-api.eu-gb.bluemix.net:8443
@@ -198,14 +193,15 @@ In this task, we will log into the IBM Containers command line to connect to Blu
         	Example Usage:
         	docker ps
         	docker images
+```
 
 ## Congratulations!!!  You have successfully accomplished Lab 1.
 
 #### Let's recap what you've accomplished thus far:
 
-- Verified your Docker version
-- Downloaded and ran your first Docker container
-- Downloaded two new Docker images to run locally on your development VM
-- Logged into the IBM Containers command line
+- Verified your Docker version.
+- Downloaded and ran your first Docker container.
+- Downloaded two new Docker images to run locally.
+- Logged into the IBM Containers command line.
 
 ### Time to continue with [Lab 2 - Running Docker Images in IBM Containers](2-Running-Docker-Images-in-IBM-Containers.md)
