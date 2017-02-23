@@ -13,19 +13,19 @@
 
 ## Prerequisites
 
-Prior to running this lab, you must have completed the pre-reqs.
+Prior to running this lab, you must have completed the [Prerequisites](https://github.com/bainsy88/containers-denmark/blob/master/0-prereqs.md).
 
 ## Task 1: Upload Docker Image to Bluemix
 
-1. Use the Container namespace in subsequent tasks.
+1. Get your Container namespace for use in subsequent tasks.
 
   ```
-	$ export CONTAINER_NAMESPACE=$(cf ic namespace get)
+  $ export CONTAINER_NAMESPACE=$(cf ic namespace get)
   ```
-2. Upload the Docker image from the Docker public registry to Bluemix as we did earlier using the following command.
+2. Copy the Docker image from Docker Hub to Bluemix:
 
   ```
-	$ cf ic cpi ragsns/spring-boot registry.eu-gb.bluemix.net/$CONTAINER_NAMESPACE/spring-boot
+  $ cf ic cpi ragsns/spring-boot registry.eu-gb.bluemix.net/$CONTAINER_NAMESPACE/spring-boot
 Sending build context to Docker daemon 2.048 kB
 Step 0 : FROM ragsns/spring-boot
  ---> d8dc5ff8d27b
@@ -51,9 +51,9 @@ ef2704e74ecc: Image already exists
 Digest: sha256:8a450a05521481b3df8c052f84c1888a7bc1406b0ee2b4ab0146d4dede043c0c
   ```  
 
-## Task 2: Create a Container Recovery Group
+## Task 2: Create a Container Group
 
-1. Create a Container Recovery Group with 3 (at least greater than 1) instances and port 8080 exposed with the following command. 
+1. Create a Container Group with 3 instances and port 8080 exposed with the following command. 
 
   ```
   $ cf ic group create  -p 8080 --name spring-boot --hostname spring-boot-$CONTAINER_NAMESPACE --domain eu-gb.mybluemix.net --memory 512 --max 3 --desired 3 --auto --anti registry.eu-gb.bluemix.net/$CONTAINER_NAMESPACE/spring-boot
@@ -64,7 +64,7 @@ Maximum container instances: 3
 Desired container instances: 3
   ```
   
-2. Verify the group was created with the following command. Eventually the status will show `CREATE_COMPLETE`.
+2. Verify that the group was created with the following command. Eventually the status will show `CREATE_COMPLETE`.
 
   ```
   $ cf ic group list
@@ -72,7 +72,7 @@ Desired container instances: 3
 123dbe80-8ae8-434c-ba79-33a64aa82636 spring-boot                         CREATE_COMPLETE                     2015-11-20T16:38:33Z                                                    8080
   ```
   
-3. Inspect the group with the following command.
+3. Inspect the group with the following command:
 
   ```
   $ cf ic group inspect spring-boot
@@ -157,7 +157,7 @@ Desired container instances: 3
   
 ## Task 3: Verify Scalability
 
-There is a web service endpoint `/env` that we will invoke now as below.
+The `spring-boot` container has a web service endpoint `/env` that we will invoke now as below.
 
 1. List all the environment variables associated with the application using the following command.
 
@@ -187,7 +187,7 @@ space_id = 49911e9c-cf3e-4913-9e20-ff52ed6d34e3
 HOME = /root
   ```
 
-2. We are primarily interested in the `HOSTNAME`. A container recovery group automatically creates a load balancer and load balances amongst these different instances. If you invoke the command repeatedly you must see as many different instances as the size of the container recovery group and no more (in this case three).
+2. We are primarily interested in the `HOSTNAME`. A container group automatically creates a load balancer which distributes requests amongst these different instances. If you invoke the command repeatedly you will see as many different instances as the size of the container group and no more (in this case three).
 
   ```
   $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
@@ -198,10 +198,13 @@ HOME = /root
   $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
   HOSTNAME = instance-00122559
   ```
-    ```
+  
+  ```
   $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
   HOSTNAME = instance-0010b64e
+  
   ```
+
 You will start to see the same instances recycle after a while depending on how the load balancer balances the load.
 
   ```
@@ -221,17 +224,17 @@ b140192a-620c-4ba0-9d82-53822cb56f21 sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34
 66ad3b7c-de2d-4707-a7a8-f894302e52e7 sp-hwuf-gdh2kugrqbez-6g3x7aumtnk5-server-aj2czsn3ntak spring-boot                         registry.eu-gb.bluemix.net/ragsns/spring-boot:latest 2016-01-23 00:35:17 -0500 EST       Running                             172.30.0.167                        8080
   ```
 
-2. We will stop one of the containers either using the container Id or by issuing a command as below which will extract the container ID of the last container.
+2. We will stop one of the containers either using the container ID or by issuing a command as below which will extract the container ID of the last container.
 
   ```
   $ cf ic rm --force $(cf ic group instances spring-boot | tail -1 | awk '{print $1}')
   66ad3b7c-de2d-4707-a7a8-f894302e52e7
   ```
 
-3. Invoking the command immediately after deleting an instance should show that there is an instance (which is about to be recovered) that is not running or showing status as `DELETED`.
+3. Invoking the `cf ic group instances` command immediately after deleting an instance should show that there is an instance that is not running or showing status as `DELETED`.
 
   ```
-  cf ic group instances spring-boot
+  $ cf ic group instances spring-boot
 Container Id                         Name                                                  Group                               Image                                             Created                             Updated                             State                               Private IP                          Port
 1dc25949-b438-475b-8a63-40fab21b2700 sp-hwuf-wqvsqk7ywu3v-xs6i2dvhrutr-server-nh33si6nzus7 spring-boot                         registry.eu-gb.bluemix.net/ragsns/spring-boot:latest 2016-02-03 10:05:16 -0500 EST       Running                             172.30.0.222                        8080
 b140192a-620c-4ba0-9d82-53822cb56f21 sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34z3y46o3o6t spring-boot                         registry.eu-gb.bluemix.net/ragsns/spring-boot:latest 2016-02-01 10:22:32 -0500 EST       Running                             172.30.0.173                        8080
@@ -247,13 +250,13 @@ b140192a-620c-4ba0-9d82-53822cb56f21 sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34
   ```
   
 
-4. After a while, you will notice that a container was just restarted (as in 13 minutes ago) compared with the other containers (that were started a day or more ago).
+4. After a while, you will notice that a container was just restarted.
 
   ```
   $ cf ic ps -a
   CONTAINER ID        IMAGE                                                           COMMAND             CREATED             STATUS                   PORTS                                                      NAMES
 
-1dc25949-b43        registry.eu-gb.bluemix.net/ragsns/spring-boot:latest               ""                  13 minutes ago      Running 13 minutes ago   8080/tcp                                                   sp-hwuf-wqvsqk7ywu3v-xs6i2dvhrutr-server-nh33si6nzus7
+1dc25949-b43        registry.eu-gb.bluemix.net/ragsns/spring-boot:latest               ""                  1 minute ago      Running 1 minute ago   8080/tcp                                                   sp-hwuf-wqvsqk7ywu3v-xs6i2dvhrutr-server-nh33si6nzus7
 b140192a-620        registry.eu-gb.bluemix.net/ragsns/spring-boot:latest               ""                  47 hours ago        Running a day ago        8080/tcp                                                   sp-hwuf-rbnbi734lsw7-4qukjqwpvfaf-server-34z3y46o3o6t
 b5676e3f-c42        registry.eu-gb.bluemix.net/ragsns/spring-boot:latest               ""                  11 days ago         Running 11 days ago      8080/tcp                                                   sp-hwuf-gdh2kugrqbez-6g3x7aumtnk5-server-aj2czsn3ntak
   ```
@@ -269,7 +272,8 @@ b5676e3f-c42        registry.eu-gb.bluemix.net/ragsns/spring-boot:latest        
   $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
   HOSTNAME = instance-00122559
   ```
-    ```
+  
+  ```
   $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
   HOSTNAME = instance-0010b64e
   ```
@@ -283,12 +287,12 @@ To continue with another lab, you need to clean up your container group.  This c
 $ cf ic group rm -f spring-boot
   ```
 
-##Congratulations!!!  You have successfully accomplished Lab 4.
+## Congratulations!!!  You have successfully accomplished Lab 3.
 
-####Let's recap what you've accomplished thus far in this lab:
+#### Let's recap what you've accomplished thus far in this lab:
 
-- Created a Container Group
-- Verified scalability and load balancing of the container instances in the group
+- Created a Container Group.
+- Verified scalability and load balancing of the container instances in the group.
 - Verified recoverability by forcibly deleting an instance and noticing that another instance gets recreated.
 
 
