@@ -4,7 +4,7 @@
 
 1. Pre-requisite installation
     * Install Docker 1.8.1 or later from [Docker](https://www.docker.com/products/docker).  
-      - Note if you are using windows 7 or below you will need to use [Docker Toolbox](https://www.docker.com/docker-toolbox) instead.
+      - Note if you are using Windows 7 or below you will need to use [Docker Toolbox](https://www.docker.com/docker-toolbox) instead.
     * Install the [Cloud Foundry CLI version 6.12.0 or later][cloud-foundry-cli] from the GitHub repository
     * Install the [IBM Containers plugin][ibm-containers-cli] for the Cloud Foundry CLI
 2. Sign up for an IBM Bluemix account at [Bluemix Signup][bluemix-signup-link]
