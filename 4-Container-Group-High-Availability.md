@@ -13,22 +13,23 @@
 
 ## Prerequisites
 
-Prior to running this lab, you must have completed the [Prerequisites](https://github.com/bainsy88/containers-denmark/blob/master/0-prereqs.md). This lab will also only work for users not on a trial account, due to quota restrictions
+Prior to running this lab, you must have completed the [Prerequisites](https://github.com/bainsy88/containers-denmark/blob/master/0-prereqs.md).
 
-## Task 1: Setup a Second Bluemix Space in Your Org
+Bluemix trial accounts do not have enough quota resources to complete this tutorial. To complete this tutorial, you must upgrade to a pay as you go Bluemix account.
+
+## Task 1: Set up a Second Bluemix Space in Your Organization
   
 1. Create a second Bluemix space.
 
-    - Click Account > Manage Organizations page.
-    - Identify the org that you want to add a space to, and select View Details.
-    - Click Add a Space.
+    - From the Bluemix Dashboard, click **Account** > **Manage Organizations**.
+    - Identify the Organization that you want to add a space to, and select **View Details**.
+    - Click **Add a Space**.
     - Enter the space name.
-    - Click Add.
+    - Click **Add**.
 
-  ![addspace](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/35-add-space.jpg)
+  ![Screenshot indicating the Add a Space button](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/35-add-space.jpg)
 
-2. Now we have a second space we need to make sure they are assigned to separate availability zones.
-
+2. Ensure that your two spaces are provisioned in different availability zones. In one of your spaces, run the following command:
 
         $ cf ic info
                                     
@@ -46,7 +47,7 @@ Prior to running this lab, you must have completed the [Prerequisites](https://g
         ...
 
  
-  In the above example, you can see that the first space is in zone `lon02-01`. We now need to target the second space.
+  In the above example, note that this space is provisioned in the `lon02-01` Availability Zone. Next, switch to the second space.
 
 
         $ cf target -s [space2_name]
@@ -57,7 +58,7 @@ Prior to running this lab, you must have completed the [Prerequisites](https://g
         Space:          [space2_name]
 
 
-  Now we are targeting the second space, we can re-run `cf ic info`.
+  Now you are targeting the second space, re-run `cf ic info` to check the availability zone.
 
 
        $ cf ic info
@@ -75,11 +76,11 @@ Prior to running this lab, you must have completed the [Prerequisites](https://g
        Availability Zone        ams03-01
        
 
-As you can see above the second space is in the `ams03-01` availability zone. This means that any containers started in this space will be running in the Amsterdam datacentre.
+  In the above example, the second space is provisioned in the `ams03-01` Availability Zone. Any containers started in this space run in the Amsterdam datacenter.
 
-If the Availability Zone on the second space is the same as first space you can run `cf ic reprovision -f [ams03-01 or lon02-01]` to reprovision the second space to the other Availability Zone.
+  If both spaces are provisioned in the same Availability Zone, run `cf ic reprovision -f [ams03-01 or lon02-01]` to reprovision one of your spaces to the other Availability Zone.
 
-We now have 2 spaces assigned to different availability zones.
+  You now have 2 spaces assigned to different Availability Zones.
 
 ## Task 2: Create a Container Group in Each Availability Zone
 
@@ -113,7 +114,7 @@ We now have 2 spaces assigned to different availability zones.
         ef2704e74ecc: Image already exists 
         Digest: sha256:8a450a05521481b3df8c052f84c1888a7bc1406b0ee2b4ab0146d4dede043c0c
 
-3. Create a Container Group with 3 instances and port 8080 exposed with the following command. 
+3. Create a Container Group with 3 instances and port 8080 exposed with the following command: 
 
 
         $ cf ic group create  -p 8080 --name spring-boot --hostname spring-boot-$CONTAINER_NAMESPACE --domain eu-gb.mybluemix.net --memory 512 --max 3 --desired 3 --auto --anti registry.eu-gb.bluemix.net/$CONTAINER_NAMESPACE/spring-boot
@@ -131,9 +132,9 @@ We now have 2 spaces assigned to different availability zones.
         Group Id                             Name                                Status                              Created                             Updated                             Port
         123dbe80-8ae8-434c-ba79-33a64aa82636 spring-boot                         CREATE_COMPLETE                     2015-11-20T16:38:33Z                                                    8080
 
-You now have a container group set up in your second space, running in Amsterdam. We now need to create a second container group in your first space.
+  You now have a container group set up in your second space, running in Amsterdam. We now need to create a second container group in your first space.
 
-5. Target you first space.
+5. Target your first space.
   
 
         $ cf target -s [space1_name]
@@ -144,13 +145,13 @@ You now have a container group set up in your second space, running in Amsterdam
         Space:          [space1_name]
 
 
-6. Repeat steps 1 - 4 now you are targetting the first space. This will create another container group using the same external route, but this time running in other availability zone.
-  
+6. Repeat steps 1 - 4 to create another container group in the first space. This container group uses the same external route, but runs in the other Availability Zone.
+
 ## Task 3: Verify Scalability
 
 The `spring-boot` container has a web service endpoint `/env` that we will invoke now as below.
 
-1. List all the environment variables associated with the application using the following command.
+1. List all the environment variables associated with the application using the following command:
 
         $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env
         Environment : 
@@ -178,7 +179,7 @@ The `spring-boot` container has a web service endpoint `/env` that we will invok
 
 2. We are primarily interested in the `HOSTNAME`. A container group automatically creates a load balancer which distributes requests amongst these different instances. If you invoke the command repeatedly you will see as many different instances as the size of the container group and no more (in this case three).
 
-If you invoke the command repeatedly you will see as many different instances id's as the total number of instances across both groups(in this case six).
+If you invoke the command repeatedly, you will see as many different instances IDs as the total number of instances across both groups (in this case six).
 
         $ curl -L spring-boot-$CONTAINER_NAMESPACE.eu-gb.mybluemix.net/env | grep HOSTNAME
         HOSTNAME = instance-000abaec
