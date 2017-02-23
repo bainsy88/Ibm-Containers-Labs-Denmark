@@ -59,9 +59,9 @@ Docker Engine should be installed and running in your machine. In this task we w
 
 In this task, you will work with two public Docker images, [Let's Chat](https://github.com/sdelements/lets-chat) and [MongoDB](https://www.mongodb.org/).  The Let's Chat image is a web application that allows users to create message rooms for collaboration.  MongoDB is an open source, document-oriented database designed with both scalability and developer agility in mind.  
 
-First, you will need to pull them down locally from the public [DockerHub](https://hub.docker.com/), which is a repository for Docker images.  By pulling (i.e., downloading) these images we will have them available on our workstation, which is required to run the images locally to learn how they function.
+First, you will need to pull them down locally from the public [Docker Hub](https://hub.docker.com/), which is a repository for Docker images.  By pulling (i.e., downloading) these images we will have them available on our workstation, which is required to run the images locally to learn how they function.
 
-1. Pull the MongoDB image from DockerHub
+1. Pull the MongoDB image from Docker Hub
 
         $ docker pull mongo
         Using default tag: latest
@@ -74,7 +74,7 @@ First, you will need to pull them down locally from the public [DockerHub](https
         Digest: sha256:0d4453308cc7f0fff863df2ecb7aae226ee7fe0c5257f857fd892edf6d2d9057
         Status: Downloaded newer image for mongo:latest
 
-2. Pull the Let's Chat image from DockerHub
+2. Pull the Let's Chat image from Docker Hub
 
         $ docker pull sdelements/lets-chat
         Using default tag: latest
