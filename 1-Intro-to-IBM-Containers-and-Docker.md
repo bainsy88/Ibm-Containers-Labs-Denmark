@@ -38,7 +38,7 @@ Docker Engine should be installed and running in your machine. In this task we w
          Built:        Wed Feb  8 08:47:51 2017
          OS/Arch:      linux/amd64
 
-2. To get started with Docker, run a simple container locally, using the `hello-world` image with the command """docker run hello-world".
+2. To get started with Docker, run a simple container locally, using the `hello-world` image with the command "docker run hello-world".
 
         $ docker run hello-world
 
