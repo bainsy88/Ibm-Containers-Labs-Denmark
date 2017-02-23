@@ -13,7 +13,7 @@
 
 ## Prerequisites
 
-Prior to running this lab, you must have completed the pre-reqs. This lab will also only work for users not on a trial account, due to quota restrictions
+Prior to running this lab, you must have completed the [Prerequisites](https://github.com/bainsy88/containers-denmark/blob/master/0-prereqs.md). This lab will also only work for users not on a trial account, due to quota restrictions
 
 ## Task 1: Setup a Second Bluemix Space in Your Org
   
@@ -46,7 +46,7 @@ Availability Zone        lon02-01
 ...
   ```
  
-  In the above example you can see that the first space is in zone lon02-01. We now need to target the second space.
+  In the above example, you can see that the first space is in zone `lon02-01`. We now need to target the second space.
 
   ```
   $ cf target -s [space2_name]
@@ -57,7 +57,7 @@ Org:            jack.baines@uk.ibm.com
 Space:          [space2_name]
   ```
 
-  Now we are targeting the second space we can re-run `cf ic info`.
+  Now we are targeting the second space, we can re-run `cf ic info`.
 
   ```
 $ cf ic info
@@ -75,7 +75,7 @@ Namespace                bainsy88
 Availability Zone        ams03-01
 ```
 
-As you can see above the second space is in the ams03-01 availability zone. This means that any containers started in this space will be running in the Amsterdam datacentre.
+As you can see above the second space is in the `ams03-01` availability zone. This means that any containers started in this space will be running in the Amsterdam datacentre.
 
 If the Availability Zone on the second space is the same as first space you can run `cf ic reprovision -f [ams03-01 or lon02-01]` to reprovision the second space to the other Availability Zone.
 
@@ -83,21 +83,20 @@ We now have 2 spaces assigned to different availability zones.
 
 ## Task 2: Create a Container Group in Each Availability Zone
 
-1. Use the Container namespace in subsequent tasks.
+1. Get your Container namespace for use in subsequent tasks.
 
   ```
-	$ export CONTAINER_NAMESPACE=$(cf ic namespace get)
+  $ export CONTAINER_NAMESPACE=$(cf ic namespace get)
   ```
-
-2. Upload the Docker image from the Docker public registry to Bluemix as we did earlier using the following command.
+2. Copy the Docker image from Docker Hub to Bluemix:
 
   ```
-	$ cf ic cpi ragsns/spring-boot registry.eu-gb.bluemix.net/$CONTAINER_NAMESPACE/spring-boot
+  $ cf ic cpi ragsns/spring-boot registry.eu-gb.bluemix.net/$CONTAINER_NAMESPACE/spring-boot
 Sending build context to Docker daemon 2.048 kB
-Step 0 : FROM bainsy88/spring-boot
+Step 0 : FROM ragsns/spring-boot
  ---> d8dc5ff8d27b
 Successfully built d8dc5ff8d27b
-The push refers to a repository [registry.eu-gb.bluemix.net/bainsy88/spring-boot] (len: 1)
+The push refers to a repository [registry.eu-gb.bluemix.net/ragsns/spring-boot] (len: 1)
 d8dc5ff8d27b: Image already exists 
 3565bce48566: Image already exists 
 bc1666c40f44: Image already exists 
@@ -118,28 +117,28 @@ ef2704e74ecc: Image already exists
 Digest: sha256:8a450a05521481b3df8c052f84c1888a7bc1406b0ee2b4ab0146d4dede043c0c
   ```  
 
-3. Create a Container Recovery Group with 3 (at least greater than 1) instances and port 8080 exposed with the following command. 
+3. Create a Container Group with 3 instances and port 8080 exposed with the following command. 
 
   ```
   $ cf ic group create  -p 8080 --name spring-boot --hostname spring-boot-$CONTAINER_NAMESPACE --domain eu-gb.mybluemix.net --memory 512 --max 3 --desired 3 --auto --anti registry.eu-gb.bluemix.net/$CONTAINER_NAMESPACE/spring-boot
   Create group in progress
-Created group spring-boot (id: 0254ec35-6fb5-4514-9aca-bef3fcdc3215)
+Created group spring-boot (id: 123dbe80-8ae8-434c-ba79-33a64aa82636)
 Minimum container instances: 0
 Maximum container instances: 3
 Desired container instances: 3
   ```
   
-4. Verify the group was created with the following command. Eventually the status will show `CREATE_COMPLETE`.
+4. Verify that the group was created with the following command. Eventually the status will show `CREATE_COMPLETE`.
 
   ```
   $ cf ic group list
   Group Id                             Name                                Status                              Created                             Updated                             Port
-0254ec35-6fb5-4514-9aca-bef3fcdc3215 spring-boot                         CREATE_COMPLETE                     2017-02-22 14:29:01 +0000 GMT                                                    8080
+123dbe80-8ae8-434c-ba79-33a64aa82636 spring-boot                         CREATE_COMPLETE                     2015-11-20T16:38:33Z                                                    8080
   ```
 
-You now have a container group set up in space 2, running in Amsterdam. We now need to create a second container group in the first space.
+You now have a container group set up in your second space, running in Amsterdam. We now need to create a second container group in your first space.
 
-5. Target the first space.
+5. Target you first space.
   
   ```
   $ cf target -s [space1_name]
@@ -150,11 +149,11 @@ Org:            jack.baines@uk.ibm.com
 Space:          [space1_name]
   ```
 
-6. Repeat steps 1 - 4 now you are targetting the first space. This will create another container group using the same external route, but this time running in London.
+6. Repeat steps 1 - 4 now you are targetting the first space. This will create another container group using the same external route, but this time running in other availability zone.
   
 ## Task 3: Verify Scalability
 
-There is a web service endpoint `/env` that we will invoke now as below.
+The `spring-boot` container has a web service endpoint `/env` that we will invoke now as below.
 
 1. List all the environment variables associated with the application using the following command.
 
@@ -184,7 +183,7 @@ space_id = 49911e9c-cf3e-4913-9e20-ff52ed6d34e3
 HOME = /root
   ```
 
-2. We are primarily interested in the `HOSTNAME`. A container recovery group automatically creates a load balancer and load balances amongst these different instances. In additon to the load balancing within the group, we are also going to load balance across both the groups, running in different datacentres, as they are both bound to the same route.
+2. We are primarily interested in the `HOSTNAME`. A container group automatically creates a load balancer which distributes requests amongst these different instances. If you invoke the command repeatedly you will see as many different instances as the size of the container group and no more (in this case three).
 
 If you invoke the command repeatedly you will see as many different instances id's as the total number of instances across both groups(in this case six).
 
@@ -234,14 +233,14 @@ You will start to see the same instances recycle after a while depending on how 
 0254ec35-6fb5-4514-9aca-bef3fcdc3215 spring-boot                         CREATE_COMPLETE                     2017-02-22 14:29:01 +0000 GMT                                                    8080
   ```
 
-2. We will remove the group that is running in the currently targeted space. This is to simulate an outage in the Amsterdam Datacentre 
+2. We will remove the group that is running in the currently targeted space. This is to simulate an outage in the Amsterdam Datacenter. 
 
   ```
 $ cf ic group rm -f spring-boot
   ```
 
 
-3. Invoking the command immediately after deleting will show the group is in DELETE_IN_PROGRESS state.
+3. Invoking the command immediately after deleting will show the group is in `DELETE_IN_PROGRESS` state.
 
   ```
 $ cf ic group list
@@ -256,9 +255,9 @@ Group ID                               Name          Status               Create
 Hello World!
   ```
 
-  The reason this still works is the requests are being routed to the container group that is still running in space 1 which is provisioned in London
+  The request is still completed seccessfully because it is routed to the container group in London.
 
-5. Switch to the your other space so we can validate the group is still running in space 1 
+5. Switch to your other space so we can validate the group is still running:
 
   ```
   $ cf target -s [space1_name]
@@ -270,6 +269,7 @@ Space:          [space1_name]
   ```
 
   ```
+  $ cf ic group list
   Group ID                               Name          Status            Created                         Updated                         Port   
 76f0178b-74a4-48eb-bd13-4370897e6050   spring-boot   UPDATE_COMPLETE   2017-02-22 11:34:01 +0000 GMT   2017-02-22 11:44:02 +0000 GMT   808
   ```
@@ -281,10 +281,10 @@ To continue with another lab, you need to clean up your container group.  This c
 $ cf ic group rm -f spring-boot
   ```
 
-##Congratulations!!!  You have successfully accomplished Lab 4.
+## Congratulations!!!  You have successfully accomplished Lab 4.
 
-####Let's recap what you've accomplished thus far in this lab:
+#### Let's recap what you've accomplished thus far in this lab:
 
-- Created a Second Bluemix Space in Your Org
-- Created a Container Group in Each Availability Zone
-- Verified high availability by deleting the group in space 2 and confirming we could still serve requests
+- Created a Second Bluemix Space in Your Org.
+- Created a Container Group in Each Availability Zone.
+- Verified high availability by deleting one of the two container groups and demonstrated that requests are still served correctly.
