@@ -33,7 +33,7 @@ In this lab, you will learn how to push images to your hosted private registry o
 
 In this lab, you will create a container recovery group, and understand how scalability is achieved via a load balancer that is automatically inserted front ending the container instances. We will then look at how instances are automatically recovered.
 
-## Lab 4: [Container Group High Availability](4-Container-Group-High-and-Availability.md)
+## Lab 4: [Container Group High Availability](4-Container-Group-High-Availability.md)
 **Difficulty**: Intermediate  
 **Time Required**: 20 minutes
 
