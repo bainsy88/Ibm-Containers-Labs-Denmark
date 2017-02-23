@@ -3,10 +3,11 @@
 ###### Hands-On Lab Demonstrating the Enterprise-Grade Capabilities of IBM Containers
 
 1. Pre-requisite installation
-    * Install Docker 1.8.1 or later from [Docker](https://docs.docker.com/engine/installation/).  The easiest option is to install the full [Docker Toolbox](https://www.docker.com/docker-toolbox).
+    * Install Docker 1.8.1 or later from [Docker](https://www.docker.com/products/docker).  
+      - Note if you are using windows 7 or below you will need to use [Docker Toolbox](https://www.docker.com/docker-toolbox) instead.
     * Install the [Cloud Foundry CLI version 6.12.0 or later][cloud-foundry-cli] from the GitHub repository
     * Install the [IBM Containers plugin][ibm-containers-cli] for the Cloud Foundry CLI
-2. Sign up for an IBM Bluemix account at [https://console.eu-gb.bluemix.net][bluemix-signup-link]
+2. Sign up for an IBM Bluemix account at [Bluemix Signup][bluemix-signup-link]
    ![Bluemix](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/1-bluemix-signup.jpg)
    ![Signup](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/4-bluemix-trial.jpg)
 3. Log into IBM Bluemix
@@ -21,6 +22,6 @@
 You are now ready to begin [Lab 1 - Introduction to IBM Containers and Docker](1-Intro-to-IBM-Containers-and-Docker.md).
 
 
-[bluemix-signup-link]: https://bluemix.net
+[bluemix-signup-link]: https://console.eu-gb.bluemix.net
 [cloud-foundry-cli]: https://github.com/cloudfoundry/cli/releases
-[ibm-containers-cli]: https://www.ng.bluemix.net/docs/containers/container_cli_cfic.html#container_cli_cfic_install
+[ibm-containers-cli]: https://console.eu-gb.bluemix.net/docs/containers/container_cli_cfic_install.html
