@@ -10,19 +10,19 @@
     
     
     OS X
-    cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-mac
+    `cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-mac`
 
     Linux 64-bit
-    cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x64
-    
+    `cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x64`
+    `
     Linux 32-bit
-    cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x86
+    `cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x86`
 
     Windows 64-bit
-    cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-windows_x64.exe
+    `cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-windows_x64.exe`
 
     Windows 32-bit
-    cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-windows_x86.exe
+    `cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-windows_x86.exe`
 
 When the installation completes, an OK message is displayed. 
 2. Sign up for an IBM Bluemix account at [Bluemix Signup][bluemix-signup-link]
