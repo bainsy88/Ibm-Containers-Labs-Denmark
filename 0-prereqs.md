@@ -14,7 +14,7 @@
 
     Linux 64-bit
     `cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x64`
-    `
+    
     Linux 32-bit
     `cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x86`
 
