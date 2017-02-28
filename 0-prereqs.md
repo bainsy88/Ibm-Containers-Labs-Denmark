@@ -24,4 +24,4 @@ You are now ready to begin [Lab 1 - Introduction to IBM Containers and Docker](1
 
 [bluemix-signup-link]: https://console.eu-gb.bluemix.net
 [cloud-foundry-cli]: https://github.com/cloudfoundry/cli/releases
-[ibm-containers-cli]: https://console.eu-gb.bluemix.net/docs/containers/container_cli_cfic_install.html
+[ibm-containers-cli]: https://console.ng.bluemix.net/docs/containers/container_cli_cfic_install.html
