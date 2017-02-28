@@ -105,7 +105,7 @@ First, you will need to pull them down locally from the public [Docker Hub](http
 4. Access the Let's Chat application through your browser using the loopback IP address (127.0.0.1).
 
   In your browser, access `http://127.0.0.1:8080` or `http://localhost:8080` or `http://system_ip_here:8080`.
-  If you are using Docker Toolbox, run `docker-machine ip` to get your system IP address.
+  If you are using Docker Toolbox, run `docker-machine ls` to find the name of the docker machine and then use `docker-machine ip <machine-name>` to get your system IP address.
 
 5. You can now stop and remove your local running containers.
 
