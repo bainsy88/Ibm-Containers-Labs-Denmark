@@ -7,6 +7,24 @@
       - Note if you are using Windows 7 or below you will need to use [Docker Toolbox](https://www.docker.com/docker-toolbox) instead. When you are instructed to open a Terminal window, run Docker Quickstart Terminal from your Start menu.
     * Install the [Cloud Foundry CLI version 6.12.0 or later][cloud-foundry-cli] from the GitHub repository
     * Install the [IBM Containers plugin][ibm-containers-cli] for the Cloud Foundry CLI
+    
+    
+    OS X
+    cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-mac
+
+    Linux 64-bit
+    cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x64
+    
+    Linux 32-bit
+    cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-linux_x86
+
+    Windows 64-bit
+    cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-windows_x64.exe
+
+    Windows 32-bit
+    cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-windows_x86.exe
+
+When the installation completes, an OK message is displayed. 
 2. Sign up for an IBM Bluemix account at [Bluemix Signup][bluemix-signup-link]
    ![Bluemix](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/1-bluemix-signup.jpg)
    ![Signup](https://github.com/bainsy88/containers-denmark/raw/master/screenshots/4-bluemix-trial.jpg)
